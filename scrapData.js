@@ -111,37 +111,4 @@ function start(pagesToScrape) {
   })
 }
 
-// async function start() {
-//   const browser = await puppeteer.launch()
-//   const page = await browser.newPage()
-//   await page.goto("https://www.airbnb.com/")
-
-// await page.waitForSelector('._1slbw8s');
-// const links = await page.$$eval('._1slbw8s a',allAs => allAs.map(a=>a.href));
-// const scrapeData = [];
-
-// for(let url of links){
-//     await page.goto(url);
-//     await page.waitForSelector('._e296pg');
-//     const link1 = await page.$$eval('._e296pg a',allAs => allAs.map(a=>a.href));
-//     //console.log(link1);
-//     for(let url1 of link1){
-//     await page.goto(url1);
-//     const data = await getPageData(url1,page);
-//     //await page.waitFor(3000);
-//console.log(data)
-//     scrapeData.push(data);
-// }
-// }
-
-// //console.log(scrapeData);
-
-//  await browser.close()
-
-// }
-
 start(5).then(console.log).catch(console.error)
-
-/*exports.createPost = (req, res) => {
-  res.send({ created: true })
-}*/
