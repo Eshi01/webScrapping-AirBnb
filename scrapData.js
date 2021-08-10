@@ -39,19 +39,31 @@ async function getPageData(url) {
 
   await page.waitForSelector('._1n81at5', { waitUntil: 'load', timeout: 0 })
   const name = await page.$eval('._1n81at5', (name) => name.textContent)
-  //await page.waitForSelector('._fardlj', { waitUntil: 'load', timeout: 0 });
-  //await page.waitForSelector('._1ne5r4rt', { waitUntil: 'load', timeout: 0 });
-  //const ratings = await page.$eval("._fardlj ._1ne5r4rt",ratings =>ratings.textContent);
+  try {
+    await page.waitForSelector('span._1ne5r4rt', {
+      waitUntil: 'load',
+      timeout: 50000,
+    })
+  } catch (err) {
+    //console.log(err)
+  }
+  const ratings = await page.$eval(
+    'span._1ne5r4rt',
+    (ratings) => ratings.textContent
+  )
+
   await page.waitForSelector('._1qf7wt4w', { waitUntil: 'load', timeout: 0 })
   const no_of_ratings = await page.$eval(
     '._1qf7wt4w',
     (no_of_ratings) => no_of_ratings.textContent
   )
 
+  const rate = no_of_ratings.replace(/\D/g, '')
+
   const dataObj = {
     title: name,
-    rating: 4,
-    reviews: no_of_ratings,
+    rating: ratings,
+    reviews: rate,
   }
 
   return dataObj
